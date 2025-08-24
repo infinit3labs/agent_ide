@@ -1,21 +1,76 @@
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "agent-ide"
 version = "0.1.0"
-description = ""
+description = "An IDE for developing and managing AI agents"
 authors = [
-    {name = "Codex",email = "codex@openai.com"}
+    {name = "Agent IDE Team", email = "team@agent-ide.dev"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
 dependencies = [
-    "pyyaml (>=6.0.2,<7.0.0)"
+    "click>=8.0.0",
+    "rich>=10.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0.0",
+    "jinja2>=3.0.0",
+    "watchdog>=3.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "isort>=5.10.0",
+    "flake8>=5.0.0",
+    "mypy>=1.0.0",
+]
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[project.scripts]
+agent-ide = "agent_ide.cli:main"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.4.1"
+[project.urls]
+Homepage = "https://github.com/infinit3labs/agent_ide"
+Repository = "https://github.com/infinit3labs/agent_ide"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agent_ide*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
