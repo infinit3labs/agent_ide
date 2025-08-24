@@ -1,0 +1,5 @@
+input_text: Hello, world!
+operations:
+  - type: uppercase
+  - type: prefix
+    value: "Agent says: "
